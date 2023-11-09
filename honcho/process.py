@@ -72,7 +72,8 @@ class Popen(subprocess.Popen):
         }
         options.update(**kwargs)
 
-        if ON_WINDOWS:
+        # if ON_WINDOWS:
+        if False:
             # MSDN reference:
             #   http://msdn.microsoft.com/en-us/library/windows/desktop/ms684863%28v=vs.85%29.aspx
             create_no_window = 0x08000000

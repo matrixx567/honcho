@@ -108,9 +108,16 @@ class Manager(object):
         while 1:
             try:
                 msg = self.events.get(timeout=0.1)
+                
+            # https://github.com/nickstenning/honcho/issues/183#issue-171117693
             except queue.Empty:
                 if exit:
                     break
+            except IOError as e:
+                import errno
+                if e.errno != errno.EINTR:
+                    raise
+                exit = True
             else:
                 if msg.type == 'line':
                     self._printer.write(msg)
