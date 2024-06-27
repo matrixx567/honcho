@@ -312,6 +312,7 @@ def main(argv=None):
         args = parser.parse_args()
 
     try:
+        log.info("Current PID: %d", os.getpid())
         _check_output_encoding()
         COMMANDS[args.command](args)
     except CommandError as e:
