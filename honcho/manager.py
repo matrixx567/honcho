@@ -113,6 +113,8 @@ class Manager(object):
             except queue.Empty:
                 if exit:
                     break
+            except InterruptedError:
+                exit = True
             except IOError as e:
                 import errno
                 if e.errno != errno.EINTR:
