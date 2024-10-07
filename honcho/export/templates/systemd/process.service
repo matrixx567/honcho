@@ -1,5 +1,5 @@
 [Unit]
-PartOf={{ app }}-{{ process.name }}.target
+PartOf={{ process_master_name }}.target
 
 [Service]
 User={{ user }}
@@ -10,7 +10,10 @@ Environment={{ k }}={{ v | shellquote }}
 ExecStart={{ shell }} -lc '{{ process.cmd }}'
 Restart=always
 StandardInput=null
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 SyslogIdentifier=%n
 KillMode=process
+
+[Install]
+WantedBy=multi-user.target
